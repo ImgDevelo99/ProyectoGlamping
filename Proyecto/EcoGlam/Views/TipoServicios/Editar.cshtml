@@ -1,0 +1,49 @@
+﻿@model TipoServicio
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/RolStyle.css" rel="stylesheet" />
+</head>
+
+<div class="container-allform-create">
+
+    <h1>Editar Tipo de Servicio</h1>
+
+
+    <div class="container-form-create">
+
+        <form asp-action="Editar" asp-controller="TipoServicios" method="post" class="borde">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="IdTipoServicio">
+
+            <div class="mb-2">
+
+                <label class="form-label" asp-for="NombreTipoServicio">Nombre del Tipo de Servicio</label>
+                <input class="form-control form-control-sm" autocomplete="off" asp-for="NombreTipoServicio" />
+                <span asp-validation-for="NombreTipoServicio" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-2">
+                <button class="btn btn-primary btn-sm w-25" type="submit">Confirmar</button>
+                <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="TipoServicios">Volver</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

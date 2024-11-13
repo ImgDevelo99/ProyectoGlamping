@@ -1,0 +1,60 @@
+﻿@model List<TipoServicio>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/Index.css" rel="stylesheet" />
+</head>
+
+<h1>Tipos de Servicios</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Lista de Tipos de Servicios</h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="search-create">
+            @if (User.HasClaim("Permiso", "Buscar Tipo Servicios"))
+            {
+                <input class="form-control mt-2" id="buscar" name="buscar" onkeyup="buscarAhora(this.value);" onblur="buscarAhora(this.value);" type="search" placeholder="Buscar por Nombre" aria-label="Search" />
+            }
+            @if (User.HasClaim("Permiso", "Buscar Tipo Servicios"))
+            {
+                <a class="btn btn-success btn-sm mt-2" asp-action="Crear" asp-controller="TipoServicios">Crear Tipo Servicio</a>
+            }
+        </div>
+        
+        <hr />
+        
+        @if (User.HasClaim("Permiso", "Listar Tipo Servicio"))
+        {
+            <div id="searchResults">
+                @await Html.PartialAsync("_ResultadoBusquedaParcial", Model)
+            </div>
+        }
+        
+    </div>
+</div>
+
+<script>
+
+    function buscarAhora(searchTerm) {
+        $.ajax({
+            url: '/TipoServicios/Buscar',
+            type: 'GET',
+            data: { searchTerm: searchTerm },
+            dataType: 'html',
+            success: function (data) {
+                $('#searchResults').html(data);
+            },
+            error: function () {
+                console.error('Error al realizar la búsqueda.');
+            }
+        });
+    }
+</script>

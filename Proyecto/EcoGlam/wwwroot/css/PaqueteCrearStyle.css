@@ -1,0 +1,52 @@
+﻿.name-form{
+    display:flex;
+    gap: 5%;
+}
+
+.name-form label{
+    width:300px;
+}
+
+.estado-form{
+    display: flex;
+    gap: 5%;
+}
+
+.container-form-create-paquete {
+    width: 100%;
+}
+
+.form-create{
+    width: 85%;
+    justify-content: space-between;
+}
+
+.costo-form {
+    display: flex;
+    gap: 5%;
+}
+
+.servicios-form {
+    display: flex;
+    justify-content:space-between;
+    max-width: 85%
+}
+
+#tablaServiciosSeleccionados {
+    width: 100%; 
+}
+
+.table-servicio {
+    min-width: 500px
+}
+
+.buttons{
+    float: right;
+    min-width: 250px;
+    margin-right:5%;
+    margin-top:3%
+}
+
+.button-submit{
+    min-width:100px
+}

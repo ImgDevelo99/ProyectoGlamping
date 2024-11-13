@@ -1,0 +1,95 @@
+﻿@model EcoGlam.Models.ViewModels.UsuarioVM
+
+@{
+    ViewData["Title"] = "Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/registroUsuarioStyle.css" rel="stylesheet" />
+</head>
+
+<div class="container-create">
+
+    <h1>Registrar Usuario</h1>
+
+    <form id="formularioRegistro" asp-controller="Usuarios" asp-action="Registrar" method="post" class="borde">
+
+        <br>
+
+        <div class="document-info">
+
+            <input id="NumeroDoc" style="min-width: 190px" class="form-control form-control-sm" type="text" placeholder="Numero de Documento" asp-for="oUsuario.NroDocumento" value="@(ViewBag.NumeroDocumento != null ? ViewBag.NumeroDocumento : "")">
+            
+            @if (ViewBag.TipoDocumento != null)
+            {
+                var options = "";
+                foreach (var tDocumento in Model.oListaTipoDocumento)
+                {
+                    var selected = (tDocumento.Value == ViewBag.TipoDocumento) ? "selected" : "";
+                    options += $"<option value='{tDocumento.Value}' {selected}>{tDocumento.Text}</option>";
+                }
+
+                <select id="tipoDocumento" class="form-select form-select-sm select-register" aria-label="Default select example" asp-for="oUsuario.IdTipoDocumento">
+                    @Html.Raw(options);
+                </select>
+            }
+            else
+            {
+                <select id="tipoDocumento" class="form-select form-select-sm select-register" aria-label="Default select example" asp-for="oUsuario.IdTipoDocumento" asp-items="@Model.oListaTipoDocumento">
+                    <option value="0" selected disabled>-- Seleccionar --</option>
+                </select>
+            }
+
+        </div>
+        <p class="formulario__input-error formulario__input-errorNumeroDoc">El numero de documento debe tener 10 numeros</p>
+
+        <input type="text" id="celular" class="form-control form-control-sm" placeholder="Celular" asp-for="oUsuario.Celular" value="@(ViewBag.Celular != null ? ViewBag.Celular : "")">
+        <p class="formulario__input-error formulario__input-errorcelular">El numero de celular debe tener 10 numeros</p>
+
+        <div class="name">
+
+            <div class="d-sm-flex flex-column">
+                <input type="text" id="nombres" style="min-width: 190px" class="form-control form-control-sm" placeholder="Nombres" asp-for="oUsuario.Nombres" value="@(ViewBag.Nombres != null ? ViewBag.Nombres : "")">
+                <p class="formulario__input-error formulario__input-errornombres">El nombre solo puede contener leras y espacios</p>
+            </div>
+
+            <div class="d-sm-flex flex-column">
+                <input type="text" id="apellidos" style="min-width: 190px" class="form-control form-control-sm" placeholder="Apellidos" asp-for="oUsuario.Apellidos" value="@(ViewBag.Apellidos != null ? ViewBag.Apellidos : "")">
+                <p class="formulario__input-error formulario__input-errorapellidos">El apellido solo puede contener leras y espacios</p>
+            </div>
+            
+        </div>
+
+        <input type="email" id="correo" class="form-control form-control-sm" placeholder="Correo" asp-for="oUsuario.Correo" value="@(ViewBag.Correo != null ? ViewBag.Correo : "")">
+        <p class="formulario__input-error formulario__input-errorcorreo">El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.</p>
+
+        <input type="password" id="contrasena" class="form-control form-control-sm" placeholder="Contraseña" asp-for="oUsuario.Contrasena">
+        <p class="formulario__input-error formulario__input-errorcontrasena">La contraseña tiene que ser de 4 a 12 dígitos.</p>
+
+        <input type="password" id="contrasena2" class="form-control form-control-sm" placeholder="Confirmar Contraseña" asp-for="oUsuario.ConfirmarContrasena">
+        <p class="formulario__input-error formulario__input-errorcontrasena2">Ambas contraseñas deben ser iguales.</p>
+
+        @if (ViewBag.Mensaje != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.Mensaje
+            </div>
+        }
+
+        <div id="mensajeError" class="alert alert-danger" style="display: none;">
+            Por favor, completa todos los campos.
+        </div>
+
+        <div class="botones">
+            <button class="btn btn-sm btn-primary" type="submit">Confirmar</button>
+            <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="Usuarios">Volver</a>
+        </div>
+
+    </form>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/js/validaciones/validacionesloginPage.js"></script>
+

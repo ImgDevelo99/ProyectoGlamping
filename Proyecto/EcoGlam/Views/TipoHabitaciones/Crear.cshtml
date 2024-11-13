@@ -1,0 +1,60 @@
+﻿@model TipoHabitacione
+
+@{
+    ViewData["Title"] = "Tipo_Habitacion_Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <script src="~/js/metodosscript.js"></script>
+</head>
+<div class="container-allform-create">
+
+    <h1>Crear Tipo de Habitacion</h1>
+
+    <div class="container-form-create mt-3">
+
+        <form asp-action="Crear" asp-controller="TipoHabitaciones" method="post" class="borde">
+
+            <input type="hidden" asp-for="IdTipoHabitacion">
+
+            <div class="mb-2">
+
+                <label class="form-label" asp-for="NomTipoHabitacion">Nombre del Tipo de Habitacion</label>
+                <input class="form-control form-control-sm" autocomplete="off" asp-for="NomTipoHabitacion" />
+                <span asp-validation-for="NomTipoHabitacion" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-2">
+
+                <label class="form-label" asp-for="NumeroPersonas">Numero de Personas</label>
+                <input class="form-control form-control-sm" autocomplete="off" asp-for="NumeroPersonas" oninput="formatoNumero(this)"/>
+                <span asp-validation-for="NumeroPersonas" class="text-danger"></span>
+
+            </div>
+
+            <input type="hidden" asp-for="Estado" value="true"/>
+
+            <div class="mt-4">
+
+                <button class="btn btn-primary btn-sm w-25" type="submit">Crear</button>
+                <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="TipoHabitaciones">Volver</a>
+
+            </div>
+
+        </form>
+
+       
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

@@ -1,0 +1,60 @@
+﻿@model List<Abono>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha Abono</th>
+                <th>Sub Total</th>
+                <th>IVA</th>
+                <th>Total</th>
+                <th>Porcentaje</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var abono in Model)
+            {
+                <tr>
+                    <td>@abono.IdAbono</td>
+                    <td>@abono.FechaAbono</td>
+                    <td>@abono.SubTotal</td>
+                    <td>@abono.Iva</td>
+                    <td>@abono.CantAbono</td>
+                    <td>@abono.Porcentaje</td>
+                    <td>
+
+                        @if (abono.Estado == true)
+                        {
+                            <p>Habilitado</p>
+                        }
+                        else
+                        {
+                            <p>Anulado</p>
+                        }
+
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-action="Detalles" asp-controller="Abono" asp-route-idAbono="@abono.IdAbono" asp-route-reservaId="@abono.IdReserva">Detalles</a>
+
+                        @if (abono.Estado == true && (ViewData["anulado"] != "true" && ViewData["finalizada"] != "true"))
+                        {
+                            <a class="btn btn-danger btn-sm" onclick="anularAbonoModal(@abono.IdAbono)">Anular</a>
+
+                        }else{
+                            <a class="btn btn-secondary btn-sm" >Anular</a>
+                        }
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron resultados.</p>
+}

@@ -1,0 +1,224 @@
+﻿@model EcoGlam.Models.ViewModels.PaqueteVM
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/paquetecrearstyle.css" rel="stylesheet" />
+    <link href="~/css/carruselstyle.css" rel="stylesheet" />
+</head>
+
+<div class="container-create">
+    <h1>Editar Paquete</h1>
+
+    <br />
+
+    <div class="container-form-create-paquete mt-3">
+
+        <form asp-action="Editar" asp-controller="Paquetes" id="paqueteForm" class="borde pt-4 pb-4" method="post" enctype="multipart/form-data">
+
+            <div class="form-create d-sm-flex form-image">
+
+                <div>
+                    <input type="hidden" asp-for="oPaquete.IdPaquete">
+
+                    <div class="mb-4 mt-5">
+                        <div class="name-form">
+                            <label class="form-label" asp-for="oPaquete.NomPaquete">Nombre del Paquete</label>
+                            <input class="form-control form-control-sm" asp-for="oPaquete.NomPaquete" />
+                        </div>
+
+                        <span asp-validation-for="oPaquete.NomPaquete" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oPaquete.Descripcion">Descripcion</label>
+                        <textarea class="form-control form-control-sm" rows="4" asp-for="oPaquete.Descripcion"></textarea>
+                        <span asp-validation-for="oPaquete.Descripcion" class="text-danger"></span>
+
+                    </div>
+
+                    <div class=" mb-2 mt-4">
+
+                        <label class="form-label" asp-for="oPaquete.Costo">Costo</label>
+                        <input class="form-control form-control-sm" id="inputCosto1" asp-for="oPaquete.Costo" readonly />
+                        <span asp-validation-for="oPaquete.Costo" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+
+
+                        <label class="form-label" asp-for="oPaquete.IdHabitacion">Habitacion</label>
+                        <select id="selectHabitacion" class="form-select form-select-sm" asp-for="oPaquete.IdHabitacion" asp-items="@Model.oListaHabitaciones">
+                            <option value="" selected disabled>-- Seleccionar --</option>
+                        </select>
+                        <span asp-validation-for="oPaquete.IdHabitacion" class="text-danger"></span>
+                        <input type="text" id="inputCostoHabitacion" class="form-control form-control-sm mt-3" disabled>
+
+                    </div>
+
+                    <input type="hidden" asp-for="oPaquete.Estado" />
+                </div>
+
+                <div>
+                    <div class="container-slide">
+                        <i id="imagenesSlider">
+                            
+                            @{
+                                bool primeraImagen = true;
+                            }
+
+                            @foreach (var url in ViewBag.ImagenesAsociadas)
+                            {
+                                <input type="radio" name="s" style="background-image: url('@url');" @(primeraImagen ? "checked" : "")>
+                                primeraImagen = false;
+                            }
+
+                        </i>
+                    </div>
+
+
+                    <div class="input-image mt-3">
+                        <label>Imagenes</label>
+                        <input type="file" name="Imagenes" id="inputImagenes" multiple class="form-control" />
+                    </div>
+
+                    <span class="text-danger">@Html.ValidationMessage("imagenPaquete")</span>
+                </div>
+
+            </div>
+
+            <div class="servicios-form">
+                <div>
+
+                    <label class="form-label mt-3">Servicios Disponibles</label>
+
+                    <select id="selectServicios" class="form-select form-select-sm">
+
+                        <option value="" disabled selected>-- Seleccionar --</option>
+                        @foreach (var servicio in ViewBag.ServiciosDisponibles)
+                        {
+                            <option value="@servicio.IdServicio">@servicio.NomServicio</option>
+                        }
+
+                    </select>
+
+                    <span class="text-danger">@Html.ValidationMessage("serviciosSeleccionados")</span>
+
+                    <input type="text" id="inputCosto" class="form-control form-control-sm mt-3" disabled>
+
+                    <button id="btnAgregarServicio" type="button" class="btn btn-success btn-sm mt-3">Agregar Servicio</button>
+
+                </div>
+
+                <div>
+
+                    <label class="form-label mt-3">Servicios Seleccionados</label>
+                    <table id="tablaServiciosSeleccionados" class="table table-st table-servicio">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Costo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var servicio in ViewBag.ServiciosAsociados)
+                            {
+                                <tr>
+                                    <td>@servicio.NomServicio</td>
+                                    <td>@string.Format("{0:C0}", servicio.Costo)</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarServicio(this)">Eliminar</button>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+
+                    <input type="hidden" id="serviciosSeleccionados" name="serviciosSeleccionados" />
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="mb-2 buttons">
+
+            <button class="btn btn-primary btn-sm button-submit" onclick="prepararYEnviar()">Confirmar</button>
+
+            <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="Paquetes">Volver</a>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/metodosscript.js"></script>
+<script src="~/js/paquetescript.js"></script>
+
+<script>
+    var Error = '@ViewData["Error"]';
+    if (Error === "True") {
+        $('select[name="oPaquete.IdHabitacion"]').val('');
+        $('#inputCosto1').val('');
+    }
+
+    $(document).ready(function () {
+        var selectedHabitacionId = $('#selectHabitacion').val();
+
+        $.ajax({
+            url: '/Paquetes/ObtenerCostoHabitacion',
+            type: 'GET',
+            data: { habitacionId: selectedHabitacionId },
+            dataType: 'json',
+            success: function (data) {
+
+                var costo = data.costo;
+                var costoFormateado = formatoCostoInput(costo);
+                $('#inputCostoHabitacion').val(costoFormateado);
+            },
+            error: function () {
+                console.error('Error al obtener el costo de la habitacion.');
+            }
+        });
+
+        var costo = $('#inputCosto1').val()
+        var costoMoneda = formatoCostoInput(parseFloat(costo))
+        $('#inputCosto1').val(costoMoneda)
+    });
+
+
+    var serviciosAsociados = @Html.Raw(Json.Serialize(ViewBag.ServiciosAsociados));
+
+    for (var i = 0; i < serviciosAsociados.length; i++) {
+
+        serviciosSeleccionados.push({
+
+            id: serviciosAsociados[i].idServicio,
+            nombre: serviciosAsociados[i].nomServicio,
+            costo: serviciosAsociados[i].costo
+
+        });
+
+        actualizarInputServiciosSeleccionados();
+
+    }
+
+    
+
+</script>

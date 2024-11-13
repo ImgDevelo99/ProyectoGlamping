@@ -1,0 +1,165 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|c:\\users\\familia\\downloads\\proyecto-tecnico\\codigo proyecto\\proyecto\\ecoglam\\controllers\\paquetescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|solutionrelative:ecoglam\\controllers\\paquetescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|c:\\users\\familia\\downloads\\proyecto-tecnico\\codigo proyecto\\proyecto\\ecoglam\\models\\paqueteservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|solutionrelative:ecoglam\\models\\paqueteservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|c:\\users\\familia\\downloads\\proyecto-tecnico\\codigo proyecto\\proyecto\\ecoglam\\views\\paquetes\\detalles.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|solutionrelative:ecoglam\\views\\paquetes\\detalles.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|c:\\users\\familia\\downloads\\proyecto-tecnico\\codigo proyecto\\proyecto\\ecoglam\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|solutionrelative:ecoglam\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|c:\\users\\familia\\downloads\\proyecto-tecnico\\codigo proyecto\\proyecto\\ecoglam\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|solutionrelative:ecoglam\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|c:\\users\\familia\\downloads\\proyecto-tecnico\\codigo proyecto\\proyecto\\ecoglam\\models\\permisosrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|solutionrelative:ecoglam\\models\\permisosrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|c:\\users\\familia\\downloads\\proyecto-tecnico\\codigo proyecto\\proyecto\\ecoglam\\views\\reservas\\crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|solutionrelative:ecoglam\\views\\reservas\\crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|c:\\users\\familia\\downloads\\proyecto-tecnico\\codigo proyecto\\proyecto\\ecoglam\\views\\roles\\crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|solutionrelative:ecoglam\\views\\roles\\crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|c:\\users\\familia\\downloads\\proyecto-tecnico\\codigo proyecto\\proyecto\\ecoglam\\views\\roles\\_resultadobusquedaparcial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4A041FC8-B882-43B7-A9B3-432D25852603}|EcoGlam\\EcoGlam.csproj|solutionrelative:ecoglam\\views\\roles\\_resultadobusquedaparcial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Detalles.cshtml",
+              "DocumentMoniker": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Views\\Paquetes\\Detalles.cshtml",
+              "RelativeDocumentMoniker": "EcoGlam\\Views\\Paquetes\\Detalles.cshtml",
+              "ToolTip": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Views\\Paquetes\\Detalles.cshtml",
+              "RelativeToolTip": "EcoGlam\\Views\\Paquetes\\Detalles.cshtml",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAAAGIAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-01T20:31:08.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PaqueteServicio.cs",
+              "DocumentMoniker": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Models\\PaqueteServicio.cs",
+              "RelativeDocumentMoniker": "EcoGlam\\Models\\PaqueteServicio.cs",
+              "ToolTip": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Models\\PaqueteServicio.cs",
+              "RelativeToolTip": "EcoGlam\\Models\\PaqueteServicio.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-01T20:28:59.348Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "EcoGlam\\Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Models\\Cliente.cs",
+              "RelativeToolTip": "EcoGlam\\Models\\Cliente.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAA8wBYAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T18:08:01.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Crear.cshtml",
+              "DocumentMoniker": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Views\\Reservas\\Crear.cshtml",
+              "RelativeDocumentMoniker": "EcoGlam\\Views\\Reservas\\Crear.cshtml",
+              "ToolTip": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Views\\Reservas\\Crear.cshtml",
+              "RelativeToolTip": "EcoGlam\\Views\\Reservas\\Crear.cshtml",
+              "ViewState": "AQIAAJkAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-25T18:45:46.469Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Crear.cshtml",
+              "DocumentMoniker": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Views\\Roles\\Crear.cshtml",
+              "RelativeDocumentMoniker": "EcoGlam\\Views\\Roles\\Crear.cshtml",
+              "ToolTip": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Views\\Roles\\Crear.cshtml",
+              "RelativeToolTip": "EcoGlam\\Views\\Roles\\Crear.cshtml",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-25T18:45:07.701Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PaquetesController.cs",
+              "DocumentMoniker": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Controllers\\PaquetesController.cs",
+              "RelativeDocumentMoniker": "EcoGlam\\Controllers\\PaquetesController.cs",
+              "ToolTip": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Controllers\\PaquetesController.cs",
+              "RelativeToolTip": "EcoGlam\\Controllers\\PaquetesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAJsAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T21:37:05.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_ResultadoBusquedaParcial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Views\\Roles\\_ResultadoBusquedaParcial.cshtml",
+              "RelativeDocumentMoniker": "EcoGlam\\Views\\Roles\\_ResultadoBusquedaParcial.cshtml",
+              "ToolTip": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Views\\Roles\\_ResultadoBusquedaParcial.cshtml",
+              "RelativeToolTip": "EcoGlam\\Views\\Roles\\_ResultadoBusquedaParcial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-23T20:42:53.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PermisosRole.cs",
+              "DocumentMoniker": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Models\\PermisosRole.cs",
+              "RelativeDocumentMoniker": "EcoGlam\\Models\\PermisosRole.cs",
+              "ToolTip": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Models\\PermisosRole.cs",
+              "RelativeToolTip": "EcoGlam\\Models\\PermisosRole.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T20:40:30.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Models\\Role.cs",
+              "RelativeDocumentMoniker": "EcoGlam\\Models\\Role.cs",
+              "ToolTip": "C:\\Users\\Familia\\Downloads\\proyecto-tecnico\\Codigo Proyecto\\Proyecto\\EcoGlam\\Models\\Role.cs",
+              "RelativeToolTip": "EcoGlam\\Models\\Role.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T20:40:14.863Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

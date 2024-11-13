@@ -1,0 +1,23 @@
+﻿.formButtons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: end;
+    column-gap: 5%;
+}
+
+.servicioForm {
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+}
+
+.servicioForm div{
+    min-width: 450px;
+
+}
+
+.buttons {
+    margin-top: 3%;
+    margin-right: 10%
+}

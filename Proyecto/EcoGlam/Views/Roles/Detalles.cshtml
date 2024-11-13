@@ -1,0 +1,61 @@
+﻿@model EcoGlam.Models.ViewModels.RolVM
+
+@{
+    ViewData["Title"] = "Crear";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/RolStyle.css" rel="stylesheet" />
+</head>
+<div class="container mt-3">
+
+    <h1>Detalles Rol</h1>
+
+    <div class="container-form-rol mt-3 borde">
+
+        <div id="formularioRol" class="mt-3">
+
+            <div class="mb-2">
+
+                <label class="form-label" asp-for="oRol.NomRol">Nombre del rol</label>
+                <input class="form-control form-control-sm input-nombre" asp-for="oRol.NomRol" disabled/>
+
+            </div>
+
+            <h4 class="mt-4">Permisos Asociados</h4>
+
+            <div class="box-1 mt-4 container-table p-2">
+
+                <div class="card p-2">
+                    <div class="card-header">
+                        <h5>Lista de Permisos</h5>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="search-create">
+                            <input class="form-control me-2" id="buscar" name="buscar" onkeyup="buscarAhoraPermisoDetalle(this.value);" type="search" placeholder="Buscar por Documento" aria-label="Search" />
+                        </div>
+
+                        <hr />
+
+                        <div id="searchResults">
+                            @await Html.PartialAsync("_ResultadoBusquedaParcialPermisosDetalles", Model.oListaPermisos)
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-5">
+                <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="Roles">Volver</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/crearrolscript.js"></script>

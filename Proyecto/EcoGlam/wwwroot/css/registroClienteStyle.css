@@ -1,0 +1,43 @@
+﻿.container-create {
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#formularioRegistro {
+    height: auto;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    gap: 20px
+}
+
+    #formularioRegistro input, select {
+        width: 100%;
+    }
+
+.formulario__input-error {
+    display: none;
+}
+
+.formulario__input-error-activo {
+    display: block;
+}
+
+.document-info {
+    display: flex;
+    gap: 30px;
+}
+
+.name {
+    display: flex;
+    gap: 30px;
+}
+
+.botones {
+    width: 200px;
+    float: right
+}

@@ -1,0 +1,132 @@
+﻿@model List<Abono>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/Index.css" rel="stylesheet" />
+</head>
+
+<h1>Abonos</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Lista de Abonos</h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="search-create">
+
+            @if (User.HasClaim("Permiso", "Buscar Abono"))
+            {
+                <input class="form-control me-2" id="buscar" name="buscar" onkeyup="buscarAhora(this.value);" onblur="buscarAhora(this.value);" type="search" placeholder="Buscar Fecha de Abono (mm/dd/yyyy)" aria-label="Search" />
+            }
+
+            <div class="create-back">
+                @if (User.HasClaim("Permiso", "Crear Abono"))
+                {
+                    @if (ViewData["anulado"] == "true")
+                    {
+                        <a class="btn btn-secondary btn-sm" onclick="mensajeAbono1()">Crear Abono</a>
+                    }
+                    else if (ViewData["finalizada"] == "true")
+                    {
+                        <a class="btn btn-secondary btn-sm" onclick="mensajeAbono2()">Crear Abono</a>
+                    }
+                    else if (ViewData["botonInhabilitado"] == "true")
+                    {
+                        <a class="btn btn-secondary btn-sm" onclick="mensajeAbono()">Crear Abono</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-success btn-sm mt-2" asp-action="Crear" asp-controller="Abono" asp-route-reservaId="@ViewBag.reservaId">Crear Abono</a>
+                    }
+                }
+
+                <a class="btn btn-dark btn-sm mt-2" asp-action="Index" asp-controller="Reservas">Volver</a>
+            </div>
+            
+        </div>
+
+        <span class="text-danger" id="spanErrorBoton"></span>
+
+        <hr />
+
+        <div id="searchResults">
+            @await Html.PartialAsync("_ResultadoBusquedaParcial", Model, ViewData)
+        </div>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function buscarAhora(searchTerm) {
+        $.ajax({
+            url: '/Abonos/Buscar',
+            type: 'GET',
+            data: { searchTerm: searchTerm },
+            dataType: 'html',
+            success: function (data) {
+                $('#searchResults').html(data);
+            },
+            error: function () {
+                console.error('Error al realizar la búsqueda.');
+            }
+        });
+    }
+
+    function mensajeAbono() {
+        $('#spanErrorBoton').html("Ya se ha abonado todo el pendiente")
+    }
+
+    function mensajeAbono1() {
+        $('#spanErrorBoton').html("La reserva de este abono esta anulada")
+    }
+
+    function mensajeAbono2() {
+        $('#spanErrorBoton').html("La reserva ya finalizó")
+    }
+
+    function anularAbonoModal(id) {
+
+        Swal.fire({
+            title: "¿Estas Seguro?",
+            text: "No podras revertir esta accion",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Anular",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                anularAbono(id);
+            }
+        });
+
+    };
+
+    function anularAbono(id) {
+
+        $.ajax({
+            url: '/Abono/anularAbono',
+            type: 'POST',
+            data: { idAbono: id },
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+                console.error('Error al anular el abono.');
+            }
+        })
+
+    }
+
+</script>
+

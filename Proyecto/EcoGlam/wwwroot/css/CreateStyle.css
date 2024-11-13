@@ -1,0 +1,22 @@
+﻿.layout-container {
+    height: 100%;
+    width: 100%;
+}
+
+.container-allform-create {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    gap:5%
+}
+
+.container-allform-create h1{
+    text-align:center;
+}
+
+
+.container-form-create {
+    display: flex;
+    justify-content: center;
+}

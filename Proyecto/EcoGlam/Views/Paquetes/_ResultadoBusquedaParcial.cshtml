@@ -1,0 +1,58 @@
+﻿@model List<Paquete>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-st">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Nombre</th>
+                <th style="text-align: center;">Habitacion</th>
+                <th style="text-align: center;">Costo</th>
+                @if (User.HasClaim("Permiso", "Cambiar Estado Paquetes"))
+                {
+                    <th style="text-align: center;">Estado</th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var paquete in Model)
+            {
+                <tr>
+                    <td style="text-align: center;">@Html.DisplayFor(m => paquete.NomPaquete)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(m => paquete.oHabitacion.Nombre)</td>
+                    <td style="text-align: center;">@String.Format("{0:C0}", paquete.Costo)</td>
+                    @if (User.HasClaim("Permiso", "Cambiar Estado Paquetes"))
+                    {
+                        <td style="display: flex; justify-content: center">
+
+                            <div class="form-check form-switch fs-4">
+
+                                <input @(paquete.Estado == true ? "checked" : "") type="checkbox" class="form-check-input" id="estado"
+                                       onchange="cambiarEstado(@paquete.IdPaquete, this)" />
+
+                            </div>
+
+                        </td>
+                    }
+                    
+                    <td style="text-align: center;">
+                        @if (User.HasClaim("Permiso", "Editar Paquetes"))
+                        {
+                            <a class="btn btn-primary btn-sm" asp-action="Editar" asp-controller="Paquetes" asp-route-idPaquete="@paquete.IdPaquete">Editar</a>
+                        }
+                        @if (User.HasClaim("Permiso", "Ver Detalles Paquetes"))
+                        {
+                            <a class="btn btn-primary btn-sm" asp-action="Detalles" asp-controller="Paquetes" asp-route-idPaquete="@paquete.IdPaquete">Detalles</a>
+                        }
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron resultados.</p>
+}

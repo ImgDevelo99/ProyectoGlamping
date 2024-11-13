@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Actualizar</title>
+    <link href="~/css/EstilosGenerales.css" rel="stylesheet" />
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .borde {
+            max-width: 400px; 
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: black;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px;
+            border-radius: 12px;
+            background-color: #1b5b6f;
+            color: #fff;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body style="background-color: #f6eeee">
+    @if (ViewBag.Restablecido == null)
+    {
+        <form asp-controller="Inicio" asp-action="Actualizar" method="post" class="borde">
+
+            <h1>Actualizar Contrasena</h1>
+
+            <br>
+
+            <input type="hidden" name="token" value="@ViewBag.Token">
+
+            <div class="mb-3">
+                <label>Ingresar una nueva contrasena: </label>
+                <input type="password" placeholder="Contrasena" name="contrasena" class="form-control form-control-sm>
+            </div>
+
+            <div class="mb-3">
+                <label>Confirmar contrasena:  </label>
+                <input type="password" placeholder="Contrasena" name="confirmarContrasena" class="form-control form-control-sm>
+            </div>
+
+            @if (ViewBag.Mensaje != null)
+            {
+                <div class="alert alert-danger mt-3">
+                    @ViewBag.Mensaje
+                </div>
+            }
+
+            <div class="mb-3">
+                <div class="d-grid mt-3">
+                    <button type="submit">Cambiar Contrasena</button>
+                </div>
+            </div>
+
+        </form>
+    }
+    else
+    {
+        <div class="alert alert-success">
+            <p>Su contrasena fue restablecida, ahora puede ingresar a su cuenta con su nueva contrasena.</p>
+            <a class="btn btn-success" href="@Url.Action("Login","Inicio")">Iniciar Sesion</a>
+        </div>
+    }
+</body>
+</html>

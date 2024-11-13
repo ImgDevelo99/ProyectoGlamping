@@ -1,0 +1,59 @@
+﻿@model List<Habitacione>
+
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-st">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo de habitacion</th>
+                <th>Costo</th>
+
+                @if (User.HasClaim("Permiso", "Cambiar Estado Habitaciones"))
+                {
+                    <th>Estado</th>
+                }
+                
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Habitacion in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => Habitacion.Nombre)</td>
+                    <td>@Html.DisplayFor(m => Habitacion.oTipoHabitacion.NomTipoHabitacion)</td>
+                    <td>@String.Format("{0:C0}", Habitacion.Costo)</td>
+                    @if (User.HasClaim("Permiso", "Cambiar Estado Habitaciones"))
+                    {
+                        <td>
+
+                            <div class="form-check form-switch fs-4">
+
+                                <input @(Habitacion.Estado == true ? "checked" : "") type="checkbox" class="form-check-input" id="estado"
+                                       onchange="cambiarEstado(@Habitacion.IdHabitacion, this)" />
+
+                            </div>
+
+                        </td>
+                    }
+                    <td>
+                        @if (User.HasClaim("Permiso", "Editar Habitaciones"))
+                        {
+                            <a class="btn btn-primary btn-sm" asp-action="Editar" asp-controller="Habitaciones" asp-route-idHabitacion="@Habitacion.IdHabitacion">Editar</a>
+                        }
+                        @if (User.HasClaim("Permiso", "Ver Detalles Habitaciones"))
+                        {
+                            <a class="btn btn-primary btn-sm" asp-action="Detalles" asp-controller="Habitaciones" asp-route-idHabitacion="@Habitacion.IdHabitacion">Detalles</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron resultados.</p>
+}

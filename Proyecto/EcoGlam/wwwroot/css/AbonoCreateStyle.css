@@ -1,0 +1,59 @@
+﻿.info-pendiente{
+    gap: 5%;
+}
+
+.info-pendiente div{
+    gap: 3%;
+}
+
+.abonado {
+    gap: 1%;
+}
+
+.abono-form{
+    justify-content: space-around;
+}
+
+.abono-form div{
+    min-width: 40vh;
+}
+
+.item-abono-form {
+    gap: 2%;
+}
+
+.item-abono-form label {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.item-abono-form input {
+    max-width: 182px;
+}
+
+.porcentaje-container label{
+    max-width: 100px;
+    min-width: 60px;
+}
+
+.porcentaje {
+    gap: 5%;
+}
+
+.porcentaje input{
+    max-width: 55px;
+}
+
+.abonado label{
+    min-width: 115px;
+}
+
+.buttons {
+    float: right;
+    min-width: 250px;
+    margin-right: 5%;
+    margin-top: 3%
+}
+
+
+

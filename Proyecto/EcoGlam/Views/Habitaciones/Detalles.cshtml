@@ -1,0 +1,108 @@
+﻿@model EcoGlam.Models.ViewModels.HabitacionVM
+
+@{
+    ViewData["Title"] = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/carruselstyle.css" rel="stylesheet" />
+    <link href="~/css/habitacionesscript.css" rel="stylesheet" />
+</head>
+
+<div class="container-allform-create">
+
+    <h1>Detalles de la Habitación</h1>
+
+    <div class="container-form-create">
+        <div class="col-sm-4 formButtons">
+
+            <form id="habitacionForm" class="d-sm-flex habitacionForm borde pt-4 pb-4" method="post" enctype="multipart/form-data">
+
+                <div>
+                    <input type="hidden" asp-for="oHabitacion.IdHabitacion">
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oHabitacion.Nombre">Nombre de la Habitacion</label>
+                        <input class="form-control form-control-sm" autocomplete="off" asp-for="oHabitacion.Nombre" disabled />
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" asp-for="oHabitacion.IdTipoHabitacion">Tipo de Habitacion</label>
+                        <select class="form-select form-select-sm" asp-for="oHabitacion.IdTipoHabitacion" asp-items="@Model.oListaTipoHabitaciones" disabled>
+                        </select>
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oHabitacion.Costo">Costo</label>
+                        <input class="form-control form-control-sm" id="inputCosto" autocomplete="off" asp-for="oHabitacion.Costo" oninput="formatoCosto(this)" disabled />
+
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oHabitacion.Descripcion">Descripcion</label>
+                        <textarea class="form-control form-control-sm" autocomplete="off" asp-for="oHabitacion.Descripcion" disabled></textarea>
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <div class="container-slide">
+
+                        <i class="imagenesSlider">
+
+                            @{
+                                bool primeraImagen = true;
+                            }
+
+                            @foreach (var url in ViewBag.ImagenesAsociadas)
+                            {
+                                <input type="radio" name="s" style="background-image: url('@url');" @(primeraImagen ? "checked" : "")>
+                                primeraImagen = false;
+                            }
+
+                        </i>
+                        
+                        
+
+                    </div>
+
+                </div>
+
+
+            </form>
+
+            <div class="mb-2 buttons">
+
+                <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="Habitaciones">Volver</a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/metodosscript.js"></script>
+<script src="~/js/habitacionscript.js"></script>
+
+<script>
+
+    var inputCosto = parseFloat($('#inputCosto').val());
+
+    if (!isNaN(inputCosto)) {
+        var inputCostoMoneda = formatoCostoInput(inputCosto);
+        $('#inputCosto').val(inputCostoMoneda);
+    }
+
+
+</script>
+

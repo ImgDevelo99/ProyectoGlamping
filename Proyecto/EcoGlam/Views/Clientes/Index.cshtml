@@ -1,0 +1,129 @@
+﻿@model List<Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/Index.css" rel="stylesheet" />
+</head>
+
+<h1>Clientes</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Lista de Clientes</h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="search-create">
+            @if (User.HasClaim("Permiso", "Buscar Clientes"))
+            {
+                <input class="form-control me-2" id="buscar" name="buscar" onkeyup="buscarAhora(this.value);" onblur="buscarAhora(this.value);" type="search" placeholder="Buscar por Nombre, Apellido, Documento o Correo" aria-label="Search" />
+            }
+            @if (User.HasClaim("Permiso", "Crear Clientes"))
+            {
+                <a class="btn btn-success btn-sm mt-2" asp-action="Registrar" asp-controller="Clientes">Registrar Cliente</a>
+            }
+        </div>
+
+        <hr />
+
+        @if (TempData.ContainsKey("Mensaje"))
+        {
+            <div id="mensaje" class="alert alert-success mt-2 mb-1">
+                @TempData["Mensaje"]
+            </div>
+        }
+
+        @if (User.HasClaim("Permiso", "Listar Clientes"))
+        {
+            <div id="searchResults">
+                @await Html.PartialAsync("_ResultadoBusquedaParcial", Model)
+            </div>
+        }
+        
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    function buscarAhora(searchTerm) {
+        $.ajax({
+            url: '/Clientes/Buscar',
+            type: 'GET',
+            data: { searchTerm: searchTerm },
+            dataType: 'html',
+            success: function (data) {
+                $('#searchResults').html(data);
+            },
+            error: function () {
+                console.error('Error al realizar la búsqueda.');
+            }
+        });
+    };
+
+    function cambiarEstado(numeroDocumento, input) {
+
+        var nroDocumento = numeroDocumento;
+        var nuevoEstado = $(input).prop('checked');
+
+        if (nuevoEstado == true) {
+            $.ajax({
+                url: '/Clientes/validarCambioEstado',
+                type: 'GET',
+                data: { nroDocumento: nroDocumento },
+                success: function (data) {
+                    if (data.respuesta == false) {
+                        Swal.fire({
+                            title: "Error",
+                            text: "El rol de este cliente esta inhabilitado. habilitalo antes de realizar esta accion",
+                            icon: "warning"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+
+                                location.reload();
+
+                            }
+                        });
+                    } else {
+                        cambiarEstadoDB(numeroDocumento, input)
+                    }
+                },
+                error: function () {
+                    console.error('Error al realizar la búsqueda.');
+                }
+            })
+        } else {
+            cambiarEstadoDB(numeroDocumento, input)
+        }
+
+    };
+
+    function cambiarEstadoDB(numeroDocumento, input) {
+
+        var nroDocumento = numeroDocumento;
+        var nuevoEstado = $(input).prop('checked');
+
+        $.ajax({
+            url: '/Clientes/cambiarEstado',
+            type: 'POST',
+            data: { nroDocumento: nroDocumento, estado: nuevoEstado }
+        })
+
+    }
+
+    const mensaje = document.getElementById('mensaje');
+
+    if (mensaje != null) {
+        setTimeout(() => {
+            mensaje.style.display = 'none';
+        }, 7000);
+    }
+    
+
+</script>
+

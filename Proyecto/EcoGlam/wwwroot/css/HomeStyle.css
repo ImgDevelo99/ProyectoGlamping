@@ -1,0 +1,379 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    background-position: center;
+    background-size: center;
+}
+
+.navbar {
+    width: 90%;
+    padding: 30px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 80px;
+    margin-top: -10px;
+}
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 20px;
+}
+
+    .navbar ul li a {
+        text-decoration: none;
+        text-transform: uppercase;
+        color: white;
+        font-weight: 600;
+        padding: 15px;
+    }
+
+li a:hover {
+    background: white;
+    transition: 0.6s;
+}
+
+.navbar a:hover {
+    color: black;
+}
+
+.content {
+    width: 100%;
+    position: absolute;
+    color: white;
+    top: 45%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+    .content h1 {
+        margin-top: 80px;
+        font-size: 90px;
+        font-weight: 800;
+    }
+
+button {
+    width: 200px;
+    padding: 15px;
+    margin: 20px 5px;
+    text-align: center;
+    border-radius: 25px;
+    color: black;
+    border: 2px;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+    button:hover {
+        background: rgb(0, 192, 226);
+        transition: 0.5s;
+    }
+
+    button:hover {
+        color: white;
+    }
+
+.banner video {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+@media (min-aspect-ratio: 16/9) {
+    .banner video {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/*GALERIA*/
+
+h1 {
+    font-size: 46px;
+    font-weight: 600;
+}
+
+p {
+    color: #777;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+
+.row {
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
+}
+
+h3 {
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+@media (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+}
+
+.campus {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 40px;
+    cursor: pointer;
+}
+
+.campus-col {
+    flex-basis: 32%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .campus-col img {
+        width: 100%;
+        display: block;
+    }
+
+.layer {
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transition: 0.5s;
+}
+
+    .layer:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .layer h3 {
+        width: 100%;
+        font-weight: 500;
+        color: #fff;
+        font-size: 26px;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+        opacity: 0;
+        transition: 0.5s;
+    }
+
+    .layer:hover h3 {
+        bottom: 49%;
+        opacity: 1;
+    }
+
+/*Slider*/
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.container {
+    height: 600px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.card {
+    width: 26vh;
+    border-radius: 0.75rem;
+    background-size: cover;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2rem;
+    margin: 0 10px;
+    display: flex;
+    align-items: flex-end;
+    transition: 0.6s cubic-bezier(0.28, -0.03, 0, 0.99);
+    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
+}
+
+    .card > .row {
+        color: orangered;
+        display: flex;
+        flex-wrap: nowrap;
+        border-color: white;
+    }
+
+        .card > .row > .icon {
+            background: #223;
+            color: orangered;
+            border-radius: 50%;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px;
+        }
+
+        .card > .row > .description {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+            height: 80px;
+            width: 520px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition-delay: 0.3s;
+            transition: all 0.3s ease;
+        }
+
+.description p {
+    color: white;
+    padding-top: 5px;
+}
+
+.description h4 {
+    text-transform: uppercase;
+}
+
+input {
+    display: none;
+}
+
+    input:checked + label {
+        width: 600px;
+    }
+
+        input:checked + label .description {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+.card[for="c1"] {
+    background-image: url("./img/Senderismo.jpg");
+}
+
+.card[for="c2"] {
+    background-image: url("./img/Cabalgata.jpg");
+}
+
+.card[for="c3"] {
+    background-image: url("./img/canotage.jpg");
+}
+
+.card[for="c4"] {
+    background-image: url("./img/escalar.jpg");
+}
+
+/*Footer*/
+
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: auto;
+    background-color: #2d2e33;
+    padding: 60px 10%;
+}
+
+ul {
+    list-style: none;
+}
+
+.footer-col {
+    width: 25%;
+}
+
+    .footer-col h4 {
+        position: relative;
+        margin-bottom: 30px;
+        font-weight: 400;
+        font-size: 22px;
+        color: #2746c0;
+        text-transform: capitalize;
+    }
+
+        .footer-col h4::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            background-color: orangered;
+            height: 2px;
+            width: 40px;
+        }
+
+ul li:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+ul li a {
+    display: block;
+    font-size: 19px;
+    text-transform: capitalize;
+    color: #bdb6b6;
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+    ul li a:hover {
+        color: white;
+    }
+
+.links a {
+    display: inline-block;
+    height: 44px;
+    width: 44px;
+    color: white;
+    background-color: #2746c0;
+    margin: 0 8px 8px 0;
+    text-align: center;
+    line-height: 44px;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+    .links a:hover {
+        color: #4d4f55;
+        background-color: white;
+    }
+
+@media (max-width: 740px) {
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+        .footer-col h4::before {
+            all: unset;
+        }
+}
+
+@media (max-width: 555px) {
+    .footer-col {
+        width: 100%;
+    }
+}

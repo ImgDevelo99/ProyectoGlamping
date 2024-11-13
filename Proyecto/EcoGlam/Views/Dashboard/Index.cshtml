@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header>
+    <link href="~/css/dashboardstyle.css" rel="stylesheet" />
+</header>
+
+<div class="text-center">
+    <h1>Dashboard</h1>
+</div>
+
+<div class="select d-flex" style="gap: 10px">
+    <label>Seleccionar rango de fechas</label>
+    <select class="form-select form-select-sm" id="selectFecha" style="max-width:250px">
+        <option value="1" selected>Últimos 7 días</option>
+        <option value="2" >Último mes</option>
+        <option value="3" >Último trimestre</option>
+        <option value="4" >Último año</option>
+        <option value="5" >Mes actual</option>
+        <option value="6" >Semana actual</option>
+    </select>
+</div>
+
+<div class="mt-5 containerDashboard">
+
+    <div class="info-box mini-box" id="box-1">
+        <div class="box-title">
+            <p>Reservas Activas</p>
+        </div>
+        <div class="box-body">
+            <strong id="reservasActivas"></strong>
+        </div>
+    </div>
+
+    <div class="info-box mini-box" id="box-2">
+        <div class="box-title">
+            <p>Reservas Realizadas</p>
+        </div>
+        <div class="box-body">
+            <strong id="reservasRealizadas"></strong>
+        </div>
+    </div>
+
+    <div class="info-box mini-box" id="box-3">
+        <div class="box-title">
+            <p>Reservas Finalizadas</p>
+        </div>
+        <div class="box-body">
+            <strong id="reservasFinalizadas"></strong>
+        </div>
+    </div>
+
+    <div class="info-box mini-box" id="box-9">
+        <div class="box-title">
+            <p>Ingresos</p>
+        </div>
+        <div class="box-body">
+            <strong id="ingresos"></strong>
+        </div>
+    </div>
+
+    <div class="col-sm-6 info-box" id="box-4">
+        <div class="card">
+            <div class="card-header">Reservas Realizadas</div>
+            <div class="card-body">
+                <canvas id="chart1"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 info-box" id="box-5">
+        <div class="card">
+            <div class="card-header">Paquetes</div>
+            <div class="card-body">
+                <canvas id="chart2"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 info-box" id="box-6">
+        <div class="card">
+            <div class="card-header">Servicios</div>
+            <div class="card-body">
+                <canvas id="chart3"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 info-box" id="box-7">
+        <div class="card">
+            <div class="card-header">Tipo Habitaciones</div>
+            <div class="card-body">
+                <canvas id="chart4"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="empty1">
+    </div>
+
+    <div class="col-sm-6 info-box" id="box-8">
+        <div class="card" style="max-width: 1000px">
+            <div class="card-header">Estados Reservas</div>
+            <div class="card-body">
+                <canvas id="chart5"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="empty2">
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/metodosscript.js"></script>
+    <script src="~/js/dashboardscript.js"></script>
+}
+
+
+
+

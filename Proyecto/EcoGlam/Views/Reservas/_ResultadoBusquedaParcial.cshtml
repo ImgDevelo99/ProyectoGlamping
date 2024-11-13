@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<Reserva>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Documento del Cliente</th>
+                <th>Fecha Reserva</th>
+                <th>Total</th>
+                @if (User.HasClaim("Permiso", "Cambiar Estado Reservas"))
+                {
+                    <th>Estado</th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reserva in Model)
+            {
+                <tr>
+                    <td>@reserva.NroDocumentoCliente</td>
+                    <td>@reserva.FechaReserva</td>
+                    <td>@String.Format("{0:C0}", reserva.MontoTotal)</td>
+                    @if (User.HasClaim("Permiso", "Cambiar Estado Reservas"))
+                    {
+                        <td>@reserva.oEstadoReserva.NombreEstadoReserva</td>
+                    }
+                    <td>
+                        @if (reserva.IdEstadoReserva == 5 || reserva.IdEstadoReserva == 6)
+                        {
+                            @if (User.HasClaim("Permiso", "Crear Abono"))
+                            {
+                                <a class="btn btn-secondary btn-sm" asp-action="Index" asp-controller="Abono" asp-route-reservaId="@reserva.IdReserva">Abonos</a>
+                            }
+                            <a class="btn btn-primary btn-sm" asp-action="Detalles" asp-controller="Reservas" asp-route-reservaId="@reserva.IdReserva">Detalles</a>
+                            <a class="btn btn-secondary btn-sm" disabled>Editar</a>
+                            <a class="btn btn-secondary btn-sm" disabled>Anular</a>
+
+                        }
+                        else
+                        {
+                            @if (User.HasClaim("Permiso", "Crear Abono"))
+                            {
+                                <a class="btn btn-success btn-sm" asp-action="Index" asp-controller="Abono" asp-route-reservaId="@reserva.IdReserva">Abonos</a>
+                            }
+                            <a class="btn btn-primary btn-sm" asp-action="Detalles" asp-controller="Reservas" asp-route-reservaId="@reserva.IdReserva">Detalles</a>
+                            <a class="btn btn-primary btn-sm" asp-action="Editar" asp-controller="Reservas" asp-route-reservaId="@reserva.IdReserva">Editar</a>
+                            @if (reserva.IdEstadoReserva == 1 || reserva.IdEstadoReserva == 2)
+                            {
+                                <a class="btn btn-danger btn-sm" onclick="cambiarEstadoModal(@reserva.IdReserva)">Anular</a>
+                            }else{
+                                <a class="btn btn-secondary btn-sm" disabled>Anular</a>
+                            }
+                        }
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron resultados.</p>
+}

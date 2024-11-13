@@ -1,0 +1,28 @@
+﻿.container-form-rol{
+    width: 100%;
+    height: 100%
+}
+
+#formularioRol {
+    width: 100%;
+    height: auto
+}
+
+button{
+    max-width:150px
+}
+
+.input-nombre{
+    max-width: 250px
+}
+
+.container-table {
+    height:auto;
+    min-width: 85vh;
+}
+
+#searchResults {
+    height: 39vh;
+    min-width: 90vh;
+    overflow: auto
+}

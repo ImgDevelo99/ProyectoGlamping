@@ -1,0 +1,85 @@
+﻿@model EcoGlam.Models.ViewModels.RolVM
+
+@{
+    ViewData["Title"] = "Crear";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/RolStyle.css" rel="stylesheet" />
+</head>
+<div class="container mt-3">
+
+    <h1>Editar Rol</h1>
+
+    <div class="container-form-rol mt-3 borde">
+
+        <form id="formularioRol" asp-action="Editar" asp-controller="Roles" method="post" class="mt-3">
+
+            <input type="hidden" asp-for="oRol.IdRol">
+
+            <div class="mb-2">
+
+                <label class="form-label" asp-for="oRol.NomRol">Nombre del rol</label>
+                <input class="form-control form-control-sm input-nombre" autocomplete="off" asp-for="oRol.NomRol" />
+                <span asp-validation-for="oRol.NomRol" class="text-danger"></span>
+
+            </div>
+
+            <div class="box-1 mt-4 container-table p-2">
+
+                <div class="card p-2">
+                    <div class="card-header">
+                        <h5>Lista de Permisos</h5>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="search-create">
+                            <input class="form-control me-2" id="buscar" name="buscar" onkeyup="buscarAhoraPermiso(this.value);" type="search" placeholder="Buscar por Nombre" aria-label="Search" />
+                        </div>
+
+                        <hr />
+
+                        <div id="searchResults">
+                            @await Html.PartialAsync("_ResultadoBusquedaParcialPermisos", Model.oListaPermisos)
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            @if (ViewBag.Mensaje != null)
+            {
+                <div class="alert alert-danger mt-3">
+                    @ViewBag.Mensaje
+                </div>
+            }
+
+            <input type="hidden" asp-for="oRol.Estado" value="true" />
+            <input id="permisosSeleccionados" type="hidden" name="permisosSeleccionados" />
+
+            <div class="mt-5">
+
+                <button class="btn btn-primary btn-sm w-25" type="submit">Editar</button>
+                <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="Roles">Volver</a>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/crearrolscript.js"></script>
+<script src="~/js/metodosscript.js"></script>
+<script>
+    permisosSeleccionados = @Html.Raw(Json.Serialize(ViewBag.ObjPermisosAsociados));
+    
+    $('.checkbox-permiso').each(function () {
+        var permisoId = $(this).data('permiso-id');
+        $(this).prop('checked', permisosSeleccionados.hasOwnProperty(permisoId) && permisosSeleccionados[permisoId]);
+    });
+</script>

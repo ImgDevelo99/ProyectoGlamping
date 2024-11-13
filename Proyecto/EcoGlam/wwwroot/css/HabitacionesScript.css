@@ -1,0 +1,24 @@
+﻿.formButtons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: end;
+    column-gap: 5%;
+}
+
+
+.habitacionForm{
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+}
+
+.habitacionForm div {
+    min-width: 450px;
+}
+
+
+.buttons {
+    margin-top: 3%;
+    margin-right: 10%
+}

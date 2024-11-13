@@ -1,0 +1,99 @@
+﻿.box-1 {
+    width: 100%;
+    justify-content: space-around;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(170, 170, 170);
+}
+
+#inputTDocumento{
+    max-width: 50px;
+    max-height: 30px;
+}
+
+#inputDocumento{
+    max-height: 30px;
+    max-width: 200px;
+}
+
+.d-sm-flex{
+    gap:5%;
+}
+
+.nom-ape-dir {
+    gap: 5%;
+}
+
+.label-correo-telefono {
+    max-width: 80px
+}
+
+.box-2 {
+    width: 100%;
+    justify-content: space-around;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(170, 170, 170);
+}
+
+.label-info-reserva div label{
+    min-width: 100px
+}
+
+.box-3 {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(170, 170, 170);
+}
+
+.select-paquete{
+    min-width: 400px;
+}
+
+.item-info-paquete label{
+    min-width: 100px;
+}
+
+.box-4 {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(170, 170, 170);
+}
+
+.buttons {
+    float: right;
+    min-width: 250px;
+    margin-right: 5%;
+    margin-top: 3%
+}
+
+.button-submit {
+    min-width: 100px
+}
+
+.table-paquetes{
+    min-width: 300px;
+}
+
+.table-servicio {
+    min-width: 500px
+}
+
+#descuento{
+    max-width: 45px;
+    min-height: 40px;
+}
+
+.label-input{
+    display: flex;
+    flex-direction:column;
+}
+
+.mensaje-boton-servicio{
+    display:flex;
+    flex-direction:column;
+}

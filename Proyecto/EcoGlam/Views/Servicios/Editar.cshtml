@@ -1,0 +1,121 @@
+﻿@model EcoGlam.Models.ViewModels.ServicioVM
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/serviciosstyle.css" rel="stylesheet" />
+    <link href="~/css/carruselstyle.css" rel="stylesheet" />
+</head>
+
+<div class="container-allform-create">
+
+    <h1>Editar Servicio</h1>
+
+    <div class="container-form-create">
+        <div class="col-sm-4 formButtons">
+
+            <form asp-action="Editar" asp-controller="Servicios" id="servicioForm" class="d-sm-flex servicioForm borde pt-4 pb-4" method="post" enctype="multipart/form-data">
+
+                <div>
+                    <input type="hidden" asp-for="oServicio.IdServicio" class="mb-3">
+
+                    <span class="text-danger">@Html.ValidationMessage("vacio")</span>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" asp-for="oServicio.IdTipoServicio">Tipo Servicio</label>
+                        <select class="form-select form-select-sm" asp-for="oServicio.IdTipoServicio" asp-items="@Model.oListaTipoServicio">
+                            <option selected disabled>-- Seleccionar --</option>
+                        </select>
+                        <span asp-validation-for="oServicio.IdTipoServicio" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oServicio.NomServicio">Nombre del Servicio</label>
+                        <input class="form-control form-control-sm" autocomplete="off" asp-for="oServicio.NomServicio" />
+                        <span asp-validation-for="oServicio.NomServicio" class="text-danger"></span>
+
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oServicio.Costo">Costo</label>
+                        <input class="form-control form-control-sm" id="inputCosto" autocomplete="off" oninput="formatoCosto(this)" asp-for="oServicio.Costo" />
+                        <span asp-validation-for="oServicio.Costo" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oServicio.Descripcion">Descripcion</label>
+                        <textarea class="form-control form-control-sm" autocomplete="off" asp-for="oServicio.Descripcion"></textarea>
+                        <span asp-validation-for="oServicio.Descripcion" class="text-danger"></span>
+
+                    </div>
+
+                    <input type="hidden" asp-for="oServicio.Estado" />
+
+                </div>
+
+                <div>
+                    <div class="container-slide">
+                        <i id="imagenesSlider">
+                            @{
+                                bool primerElemento = true;
+                            }
+                            @foreach (var urlImagen in ViewBag.Imagenes)
+                            {
+                                <input type="radio" name="s" style="background-image: url('@urlImagen');" @(primerElemento ? "checked" : "") >
+                                primerElemento = false;
+                            }
+                        </i>
+                    </div>
+
+
+                    <div class="input-image">
+                        <label>Imagenes</label>
+                        <input type="file" name="Imagenes" id="inputImagenes" multiple class="form-control" />
+                    </div>
+
+                    <span class="text-danger">@Html.ValidationMessage("imagenServicio")</span>
+                </div>
+
+            </form>
+
+            <div class="mb-2 buttons">
+
+                <button class="btn btn-primary btn-sm button-submit" onclick="prepararYEnviar()">Confirmar</button>
+
+                <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="Servicios">Volver</a>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/metodosscript.js"></script>
+<script src="~/js/serviciosscript.js"></script>
+<script src="~/js/carruselscript.js"></script>
+
+<script>
+
+    var inputCosto = parseFloat($('#inputCosto').val());
+    var inputCostoMoneda = formatoCostoInput(inputCosto);
+    $('#inputCosto').val(inputCostoMoneda);
+
+</script>
+

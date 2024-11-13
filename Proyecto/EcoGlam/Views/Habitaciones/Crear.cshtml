@@ -1,0 +1,116 @@
+﻿@model EcoGlam.Models.ViewModels.HabitacionVM
+
+@{
+    ViewData["Title"] = "Habitacion_Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/carruselstyle.css" rel="stylesheet" />
+    <link href="~/css/habitacionesscript.css" rel="stylesheet" />
+</head>
+
+<div class="container-allform-create">
+
+    <h1>Crear Habitacion</h1>
+
+    <div class="container-form-create">
+        <div class="col-sm-4 formButtons">
+
+            <form asp-action="Crear" asp-controller="Habitaciones" id="habitacionForm" class="d-sm-flex habitacionForm borde pt-4 pb-4" method="post" enctype="multipart/form-data">
+
+                <div >
+                    <input type="hidden" asp-for="oHabitacion.IdHabitacion">
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oHabitacion.Nombre">Nombre de la Habitacion</label>
+                        <input class="form-control form-control-sm" autocomplete="off" asp-for="oHabitacion.Nombre" />
+                        <span asp-validation-for="oHabitacion.Nombre" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" asp-for="oHabitacion.IdTipoHabitacion">Tipo de Habitacion</label>
+                        <select class="form-select form-select-sm" asp-for="oHabitacion.IdTipoHabitacion" asp-items="@Model.oListaTipoHabitaciones">
+                            <option selected disabled>-- Seleccionar --</option>
+                        </select>
+                        <span asp-validation-for="oHabitacion.IdTipoHabitacion" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oHabitacion.Costo">Costo</label>
+                        <input class="form-control form-control-sm" id="inputCosto" autocomplete="off" asp-for="oHabitacion.Costo" oninput="formatoCosto(this)" />
+                        <span asp-validation-for="oHabitacion.Costo" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oHabitacion.Descripcion">Descripcion</label>
+                        <textarea class="form-control form-control-sm" autocomplete="off" asp-for="oHabitacion.Descripcion"></textarea>
+                        <span asp-validation-for="oHabitacion.Descripcion" class="text-danger"></span>
+
+                    </div>
+
+                    <input type="hidden" asp-for="oHabitacion.Estado" value="true"/>
+
+                </div>
+
+                <div>
+
+                    <div class="container-slide">
+                        <i id="imagenesSlider">
+                            <input checked type="radio" name="s" style="background-image: url('/Imagenes/Default/no-image.jpg');">
+                        </i>
+                    </div>
+
+
+                    <div class="input-image">
+                        <label>Imagenes</label>
+                        <input type="file" name="Imagenes" id="inputImagenes" multiple class="form-control" />
+                    </div>
+
+                    <span class="text-danger">@Html.ValidationMessage("imagenHabitacion")</span>
+
+                </div>
+                
+
+            </form>
+
+            <div class="mb-2 buttons">
+
+                <button class="btn btn-primary btn-sm button-submit" onclick="prepararYEnviar()">Crear</button>
+
+                <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="Habitaciones">Volver</a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/metodosscript.js"></script>
+<script src="~/js/habitacionscript.js"></script>
+
+<script>
+
+    var inputCosto = parseFloat($('#inputCosto').val());
+
+    if (!isNaN(inputCosto)) {
+        var inputCostoMoneda = formatoCostoInput(inputCosto);
+        $('#inputCosto').val(inputCostoMoneda);
+    }
+
+
+</script>

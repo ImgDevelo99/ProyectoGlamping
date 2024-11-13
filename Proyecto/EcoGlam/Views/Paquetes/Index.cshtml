@@ -1,0 +1,128 @@
+﻿@model List<Paquete>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/Index.css" rel="stylesheet" />
+</head>
+
+<h1>Paquetes</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Lista de Paquetes</h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="search-create">
+            @if (User.HasClaim("Permiso", "Buscar Paquetes"))
+            {
+                <input class="form-control me-2" id="buscar" name="buscar" onkeyup="buscarAhora(this.value);" onblur="buscarAhora(this.value);" type="search" placeholder="Buscar por Nombre o Habitacion" aria-label="Search" />
+            }
+            @if (User.HasClaim("Permiso", "Crear Paquetes"))
+            {
+                <a class="btn btn-success btn-sm mt-2" asp-action="Crear" asp-controller="Paquetes">Crear Paquete</a>
+            }
+        </div>
+       
+        <hr />
+
+        @if (User.HasClaim("Permiso", "Listar Paquetes"))
+        {
+            <div id="searchResults">
+                @await Html.PartialAsync("_ResultadoBusquedaParcial", Model)
+            </div>
+        }
+        
+        
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    function buscarAhora(searchTerm) {
+        $.ajax({
+            url: '/Paquetes/Buscar',
+            type: 'GET',
+            data: { searchTerm: searchTerm },
+            dataType: 'html',
+            success: function (data) {
+                $('#searchResults').html(data);
+            },
+            error: function () {
+                console.error('Error al realizar la búsqueda.');
+            }
+        });
+    }
+
+    function cambiarEstado(id, input) {
+
+        var idPaquete = id;
+        var nuevoEstado = $(input).prop('checked');
+
+        $.ajax({
+            url: '/Paquetes/validarCambioEstado',
+            type: 'POST',
+            data: { idPaquete: idPaquete, estado: nuevoEstado },
+            success: function (data) {
+                
+                if (data.servicios == true) {
+
+                    Swal.fire({
+                        title: "Error",
+                        text: "Este paquete contiene servicios que estan inhabilitados. Habilitalos primero antes de habilitar este paquete",
+                        icon: "warning"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                            location.reload();
+
+                        }
+                    });
+
+                } else if (data.habitacion == true) {
+
+                    Swal.fire({
+                        title: "Error",
+                        text: "Este paquete contiene una habitacion inhabilitada. Habilitala primero antes de habilitar el paquete",
+                        icon: "warning"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                            location.reload();
+
+                        }
+                    });
+
+                } else {
+
+                    cambiarEstadoDb(idPaquete, input)
+
+                }
+
+            },
+            error: function () {
+                console.error('Error al realizar la búsqueda.');
+            }
+        })
+
+    }
+
+    function cambiarEstadoDb(id, input) {
+
+        var idPaquete = id;
+        var nuevoEstado = $(input).prop('checked');
+
+        $.ajax({
+            url: '/Paquetes/cambiarEstado',
+            type: 'POST',
+            data: { id: idPaquete, estado: nuevoEstado }
+        })
+
+    }
+</script>

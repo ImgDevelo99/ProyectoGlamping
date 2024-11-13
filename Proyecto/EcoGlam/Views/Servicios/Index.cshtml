@@ -1,0 +1,118 @@
+﻿@model List<Servicio>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/Index.css" rel="stylesheet" />
+</head>
+
+<h1>Servicios</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Lista de servicios</h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="search-create">
+            @if (User.HasClaim("Permiso", "Buscar Servicios"))
+            {
+                <input class="form-control mt-2" id="buscar" name="buscar" onkeyup="buscarAhora(this.value);" onblur="buscarAhora(this.value);" type="search" placeholder="Buscar por Nombre o Tipo de Servicio" aria-label="Search" />
+            }
+            @if (User.HasClaim("Permiso", "Crear Servicios"))
+            {
+                <a class="btn btn-success btn-sm mt-2" asp-action="Crear" asp-controller="Servicios">Crear Servicio</a>
+            }
+           
+        </div>
+        
+        <hr />
+
+        @if (User.HasClaim("Permiso", "Listar Servicios"))
+        {
+            <div id="searchResults">
+                @await Html.PartialAsync("_ResultadoBusquedaParcial", Model)
+            </div>
+        }
+        
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    function buscarAhora(searchTerm) {
+        $.ajax({
+            url: '/Servicios/Buscar', 
+            type: 'GET',
+            data: { searchTerm: searchTerm },
+            dataType: 'html', 
+            success: function (data) {
+                $('#searchResults').html(data);
+            },
+            error: function () {
+                console.error('Error al realizar la búsqueda.');
+            }
+        });
+    }
+
+    function cambiarEstado(id, input) {
+
+        var idServicio = id;
+        var nuevoEstado = $(input).prop('checked');
+
+        $.ajax({
+            url: '/Servicios/verificarPaquetesAsociados',
+            type: 'GET',
+            data: { idServicio: idServicio },
+            success: function (response) {
+                if (response == true && nuevoEstado == false) {
+
+                    Swal.fire({
+                        title: "¿Estas Seguro?",
+                        text: "Este servicio esta asociado a uno o varios paquete habilitados, si lo inhabilitas estos paquetes también serán inhabilitados",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Inhabilitar",
+                        cancelButtonText: "Cancelar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                            cambiarEstadoDb(idServicio, input);
+
+                        }else{
+                            location.reload();
+                        }
+                    });
+
+                } else {
+
+                    cambiarEstadoDb(idServicio, input);
+
+                }
+            }
+        })
+
+    }
+
+    function cambiarEstadoDb(id, input) {
+
+        var idServicio = id;
+        var nuevoEstado = $(input).prop('checked');
+
+        $.ajax({
+            url: '/Servicios/cambiarEstado',
+            type: 'POST',
+            data: { id: idServicio, estado: nuevoEstado }
+        })
+
+    }
+
+</script>

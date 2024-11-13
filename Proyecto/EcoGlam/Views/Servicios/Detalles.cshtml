@@ -1,0 +1,104 @@
+﻿@model EcoGlam.Models.ViewModels.ServicioVM
+
+@{
+    ViewData["Title"] = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/serviciosstyle.css" rel="stylesheet" />
+    <link href="~/css/carruselstyle.css" rel="stylesheet" />
+</head>
+
+<div class="container-allform-create">
+
+    <h1>Detalles del Servicio</h1>
+
+    <div class="container-form-create">
+        <div class="col-sm-4 formButtons">
+
+            <form id="servicioForm" class="d-sm-flex servicioForm borde pt-4 pb-4" method="post" enctype="multipart/form-data">
+
+                <div>
+                    <input type="hidden" asp-for="oServicio.IdServicio">
+
+                    <div class="mb-3">
+
+                        <label class="form-label" asp-for="oServicio.IdTipoServicio">Tipo Servicio</label>
+                        <select class="form-select form-select-sm" asp-for="oServicio.IdTipoServicio" asp-items="@Model.oListaTipoServicio" disabled>
+                        </select>
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oServicio.NomServicio">Nombre del Servicio</label>
+                        <input class="form-control form-control-sm" autocomplete="off" asp-for="oServicio.NomServicio" readonly />
+
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oServicio.Costo">Costo</label>
+                        <input class="form-control form-control-sm" id="inputCosto" autocomplete="off" oninput="formatoCosto(this)" asp-for="oServicio.Costo" readonly />
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <label class="form-label" asp-for="oServicio.Descripcion">Descripcion</label>
+                        <textarea class="form-control form-control-sm" autocomplete="off" asp-for="oServicio.Descripcion" readonly></textarea>
+
+                    </div>
+
+                </div>
+
+                <div>
+                    <div class="container-slide">
+                        <i id="imagenesSlider">
+
+                            @{
+                                bool primeraImagen = true;
+                            }
+
+                            @foreach (var url in ViewBag.ImagenesAsociadas)
+                            {
+                                <input type="radio" name="s" style="background-image: url('@url');" @(primeraImagen ? "checked" : "")>
+                                primeraImagen = false;
+                            }
+
+                        </i>
+                    </div>
+
+                </div>
+
+            </form>
+
+            <div class="mb-2 buttons">
+
+                <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="Servicios">Volver</a>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/metodosscript.js"></script>
+<script src="~/js/serviciosscript.js"></script>
+<script src="~/js/carruselscript.js"></script>
+
+<script>
+
+    var inputCosto = parseFloat($('#inputCosto').val());
+
+    if (!isNaN(inputCosto)) {
+        var inputCostoMoneda = formatoCostoInput(inputCosto);
+        $('#inputCosto').val(inputCostoMoneda);
+    }
+
+</script>
+

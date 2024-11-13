@@ -1,0 +1,443 @@
+﻿@model EcoGlam.Models.ViewModels.ReservaVM
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/reservacrearstyle.css" rel="stylesheet" />
+</head>
+
+<div class="container-create mt-3">
+
+    <h1>Editar Reserva</h1>
+
+    <div class="container-form-create-reserva">
+
+        <form asp-action="Editar" asp-controller="Reservas" id="reservaForm" method="post">
+
+            <div class="form-create">
+
+                <input type="hidden" asp-for="oReserva.IdReserva" />
+
+                <div class="box-1 p-4 d-sm-flex mt-4">
+                    <div class="nom-ape-dir">
+                        <div class="d-sm-flex mb-3">
+                            <label class="form-label">Nombres</label>
+                            <input type="text" id="inputNombre" class="form-control form-control-sm" disabled>
+                        </div>
+                        <div class="d-sm-flex mb-3">
+                            <label class="form-label">Apeliidos</label>
+                            <input type="text" id="inputApellido" class="form-control form-control-sm" disabled>
+                        </div>
+                        <div class="d-sm-flex">
+                            <label class="form-label">Direccion</label>
+                            <input type="text" id="inputDireccion" class="form-control form-control-sm" disabled>
+                        </div>
+                    </div>
+                    <div class="doc-cor-tel">
+                        <div class="d-sm-flex">
+                            <input type="text" id="inputTDocumento" class="form-control form-control-sm" disabled>
+                            <div class="mb-5">
+                                <div class="d-sm-flex">
+                                    <label class="form-label">Nro. Documento</label>
+                                    <input class="form-control form-control-sm" id="inputDocumento" autocomplete="off" onkeyup="buscarCliente(this.value)" asp-for="oReserva.NroDocumentoCliente" readonly>
+                                </div>
+                                <span id="spanDocumento" asp-validation-for="oReserva.NroDocumentoCliente" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-sm-flex">
+                            <div class="label-correo-telefono mb-2">
+                                <label class="form-label">Correo</label>
+                                <label class="form-label">Celular</label>
+                            </div>
+                            <div class="input-correo-telefono">
+                                <input type="text" id="inputCorreo" class="form-control form-control-sm mb-2" disabled>
+                                <input type="text" id="inputCelular" class="form-control form-control-sm" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-2 p-4 mt-4 d-sm-flex">
+
+                    <div class="label-info-reserva">
+                        <div class="d-sm-flex mb-2 label-input">
+
+                            <div>
+                                <label class="form-label">Inicio</label>
+
+                                @if (Model.oReserva.IdEstadoReserva == 3 || Model.oReserva.IdEstadoReserva == 4)
+                                {
+                                    <input type="date" class="form-control form-control-sm" id="fechaInicio" asp-for="oReserva.FechaInicio" readonly>
+                                }else{
+                                    <input type="date" class="form-control form-control-sm" id="fechaInicio" asp-for="oReserva.FechaInicio">
+                                }
+                                    
+                            </div>
+                            <span asp-validation-for="oReserva.FechaInicio" id="fechaInicioSpan" class="text-danger"></span>
+                        </div>
+                        <div class="d-sm-flex mb-2 label-input">
+
+                            <div>
+                                <label class="form-label">Fin</label>
+
+                                @if (Model.oReserva.IdEstadoReserva == 3 || Model.oReserva.IdEstadoReserva == 4)
+                                {
+                                    <input type="date" class="form-control form-control-sm" id="fechaFin" asp-for="oReserva.FechaFinalizacion" readonly>
+                                }else{
+                                    <input type="date" class="form-control form-control-sm" id="fechaFin" asp-for="oReserva.FechaFinalizacion">
+                                }
+                            </div>
+                            <span asp-validation-for="oReserva.FechaFinalizacion" id="fechaFinSpan" class="text-danger"></span>
+
+                        </div>
+                        <div class="d-sm-flex mb-2 label-input">
+
+                            <div>
+                                <label class="form-label">Sub Total</label>
+                                <input type="text" id="inputSubTotal" class="form-control form-control-sm" asp-for="oReserva.SubTotal" readonly>
+                            </div>
+                            <span asp-validation-for="oReserva.SubTotal" class="text-danger"></span>
+
+                        </div>
+                        <div class="d-sm-flex mb-2 label-input">
+                            <div class="d-sm-flex">
+                                <label class="form-label">Descuento</label>
+                                <input type="text" id="descuento" class="form-control form-control-sm" asp-for="oReserva.Descuento" readonly oninput="formatoDescuento(this)" onkeyup="actualizarInfoCosto()" autocomplete="off">
+                                <span class="input-group-text" id="descuento-addon">%</span>
+                            </div>
+                            <span asp-validation-for="oReserva.Descuento" class="text-danger"></span>
+
+                        </div>
+                        <div class="d-sm-flex mb-2 label-input">
+                            <div>
+                                <label class="form-label">IVA 19%</label>
+                                <input type="text" id="inputIva" class="form-control form-control-sm" asp-for="oReserva.Iva" readonly>
+                            </div>
+                            <span asp-validation-for="oReserva.Iva" class="text-danger"></span>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="label-info-reserva">
+                        <div class="d-sm-flex mb-2 label-input">
+
+                            <div>
+                                <label class="form-label">Fecha Reserva</label>
+                                <input type="text" id="fechaActual" class="form-control form-control-sm" asp-for="oReserva.FechaReserva" readonly>
+                            </div>
+                            <span asp-validation-for="oReserva.FechaReserva" class="text-danger"></span>
+
+                        </div>
+                        <div class="d-sm-flex mb-2 label-input">
+
+                            <div>
+                                <label class="form-label">Nro. Personas</label>
+                                <input type="text" id="nroPersonas" class="form-control form-control-sm" asp-for="oReserva.NroPersonas" readonly>
+                            </div>
+                            <span asp-validation-for="oReserva.NroPersonas" class="text-danger"></span>
+
+                        </div>
+                        <div class="d-sm-flex mb-2 label-input">
+
+                            <div>
+                                <label class="form-label">Total</label>
+                                <input type="text" id="inputCostoTotal" class="form-control form-control-sm" asp-for="oReserva.MontoTotal" readonly>
+                            </div>
+                            <span asp-validation-for="oReserva.MontoTotal" class="text-danger"></span>
+                        </div>
+                        <div class="d-sm-flex mb-2 label-input">
+                            <div>
+                                <label class="form-label" asp-for="oReserva.MetodoPago">Metodo Pago</label>
+                                <select class="form-select form-select-sm" asp-for="oReserva.MetodoPago" asp-items="@Model.oListaMetodoPagos" >
+                                    <option value="" selected disabled>-- Seleccionar --</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="oReserva.MetodoPago" class="text-danger"></span>
+                        </div>
+
+                        @if (Model.oReserva.IdEstadoReserva == 1)
+                        {
+                            <input type="hidden" asp-for="oReserva.IdEstadoReserva"/>
+                        }
+                        else if (Model.oReserva.IdEstadoReserva == 2)
+                        {
+                            @if (User.HasClaim("Permiso", "Cambiar Estado Reservas"))
+                            {
+                                <div class="d-sm-flex label-input">
+                                    <div>
+                                        <label class="form-label" asp-for="oReserva.IdEstadoReserva">Estado</label>
+                                        <select class="form-select form-select-sm" asp-for="oReserva.IdEstadoReserva">
+                                            <option value="2" selected>Por confirmar</option>
+                                            <option value="3"> Confirmado </option>
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="oReserva.IdEstadoReserva" class="text-danger"></span>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="hidden" asp-for="oReserva.IdEstadoReserva" />
+                            }
+
+                        }
+                        else if (Model.oReserva.IdEstadoReserva == 3)
+                        {
+                            @if (User.HasClaim("Permiso", "Cambiar Estado Reservas"))
+                            {
+                                <div class="d-sm-flex label-input">
+                                    <div>
+                                        <label class="form-label" asp-for="oReserva.IdEstadoReserva">Estado</label>
+                                        <select class="form-select form-select-sm" asp-for="oReserva.IdEstadoReserva">
+                                            <option value="3" selected>Confirmado</option>
+                                            <option value="4"> En ejecucion </option>
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="oReserva.IdEstadoReserva" class="text-danger"></span>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="hidden" asp-for="oReserva.IdEstadoReserva" />
+                            }
+                        }
+                        else if (Model.oReserva.IdEstadoReserva == 4)
+                        {
+                            @if (User.HasClaim("Permiso", "Cambiar Estado Reservas"))
+                            {
+                                <div class="d-sm-flex label-input">
+                                    <div>
+                                        <label class="form-label" asp-for="oReserva.IdEstadoReserva">Estado</label>
+                                        <select class="form-select form-select-sm" asp-for="oReserva.IdEstadoReserva">
+                                            <option value="4" selected>En ejecucion</option>
+                                            <option value="6"> Finalizada </option>
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="oReserva.IdEstadoReserva" class="text-danger"></span>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="hidden" asp-for="oReserva.IdEstadoReserva" />
+                            }
+                        }
+
+                    </div>
+
+                    <input type="hidden" id="paqueteSeleccionado" name="paqueteSeleccionado" />
+
+                </div>
+
+                <div class="box-4 p-4 d-sm-flex mt-4" style="justify-content: space-around">
+
+                    <div class="select-paquete mb-3">
+
+                        @if (Model.oReserva.IdEstadoReserva == 3 || Model.oReserva.IdEstadoReserva == 4)
+                        {
+                            <label class="form-label mt-3">Paquete Seleccionado</label>
+                        }
+                        else
+                        {
+                            <label class="form-label mt-3">Paquete Disponibles</label>
+                        }
+
+                        <div class="select-span">
+
+                            @if (Model.oReserva.IdEstadoReserva == 3 || Model.oReserva.IdEstadoReserva == 4)
+                            {
+
+                                <select id="selectPaquetes" class="form-select form-select-sm selectPaquete">
+                                    <option value="@ViewBag.PaqueteAsociado.IdPaquete" selected>@ViewBag.PaqueteAsociado.NomPaquete</option>
+                                </select>
+
+                            }
+                            else
+                            {
+
+                                <select id="selectPaquetes" class="form-select form-select-sm selectPaquete">
+                                    <option value="@ViewBag.PaqueteAsociado.IdPaquete" selected>@ViewBag.PaqueteAsociado.NomPaquete</option>
+                                    @foreach (var paquetes in ViewBag.PaquetesDisponibles)
+                                    {
+                                        <option value="@paquetes.IdPaquete">@paquetes.NomPaquete</option>
+                                    }
+                                </select>
+
+                            }
+                            <span class="text-danger">@Html.ValidationMessage("paqueteSeleccionados")</span>
+
+                        </div>
+
+                        <div class="item-info-paquete mb-3">
+                            <label class="form-label">Costo</label>
+                            <input type="text" id="inputCostoPaquete" class="form-control form-control-sm" disabled>
+                        </div>
+
+                    </div>
+
+                    <div class="d-sm-flex" style="gap: 50px">
+                        <div>
+                            <label class="form-label mt-3">Servicios Disponibles</label>
+
+                            <select id="selectServicios" class="form-select form-select-sm">
+
+                                <option value="" disabled selected>-- Seleccionar --</option>
+                                @foreach (var servicio in ViewBag.ServiciosDisponibles)
+                                {
+                                    <option value="@servicio.IdServicio">@servicio.NomServicio</option>
+                                }
+                                <input type="text" id="inputCostoServicio" class="form-control form-control-sm mt-3" disabled>
+
+                                <div class="mensaje-boton-servicio">
+                                    @{
+                                        var error = ViewData["ErrorServicio"] as string;
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(error) && error == "True")
+                                    {
+                                        <span class="text-danger">Debe haber al menso un servicio adicional</span>
+                                    }
+
+                                    <button id="btnAgregarServicio" type="button" class="btn btn-success btn-sm mt-3">Agregar Servicio</button>
+                                </div>
+
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="form-label mt-3">Servicios Seleccionados</label>
+                            <table id="tablaServiciosSeleccionados" class="table table-st table-servicio">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Costo</th>
+                                        <th>Cantidad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < ViewBag.ServiciosAsociados.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@ViewBag.ServiciosAsociados[i].oServicio.NomServicio</td>
+                                            <td>@string.Format("{0:C0}", ViewBag.ServiciosAsociados[i].Costo)</td>
+                                            <td><input style="max-width:80px;text-align: center" value="@ViewBag.CantidadesServiciosAsociados[i]" onblur="reemplazarEspacioVacioPorUno(this)" onchange="cambiarCantidad(this)" oninput="formatoNumero(this)"></td>
+                                            <td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarServicio(this)">Eliminar</button></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            <input type="hidden" id="serviciosSeleccionados" name="serviciosSeleccionados" />
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="buttons">
+            <button class="btn btn-primary btn-sm button-submit" onclick="prepararYEnviar()">Editar</button>
+            <a class="btn btn-dark btn-sm" asp-action="Index" asp-controller="Reservas">Volver</a>
+        </div>
+
+    </div>
+
+</div>
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/metodosscript.js"></script>
+<script src="~/js/reservascript.js"></script>
+
+<script>
+
+    var documentoCliente = $('#inputDocumento').val();
+    buscarCliente(documentoCliente);
+
+    var subTotal = parseFloat($('#inputSubTotal').val());
+    var iva = parseFloat($('#inputIva').val());
+    var total = parseFloat($('#inputCostoTotal').val());
+
+    $('#inputSubTotal').val(formatoCostoInput(subTotal));
+    $('#inputIva').val(formatoCostoInput(iva));
+    $('#inputCostoTotal').val(formatoCostoInput(total));
+
+    var idPaqueteSelected = $('#selectPaquetes').val();
+
+    $.ajax({
+        url: '/Reservas/ObtenerInfoBasicaPaquete',
+        type: 'GET',
+        data: { reservaId: @Model.oReserva.IdReserva},
+        dataType: 'json',
+        success: function (data) {
+            $('#inputCostoPaquete').val(formatoCostoInput(data.costo));
+        },
+        error: function () {
+            console.error('Error al obtener la informacion del paquete.');
+        }
+    });
+
+    var paqueteAsociado = @Html.Raw(Json.Serialize(ViewBag.PaqueteAsociado));
+
+    paqueteSeleccionado.push({
+
+        id: paqueteAsociado.idPaquete,
+        costo: paqueteAsociado.costo
+
+    })
+
+    actualizarInputPaqueteSeleccionado();
+
+
+    var serviciosAsociados = @Html.Raw(Json.Serialize(ViewBag.ServiciosAsociados));
+    var cantidadesServiciosAsociados = @Html.Raw(Json.Serialize(ViewBag.CantidadesServiciosAsociados));
+
+    for (var i = 0; i < serviciosAsociados.length; i++) {
+
+        serviciosSeleccionados.push({
+
+            id: serviciosAsociados[i].idServicio,
+            nombre: serviciosAsociados[i].oServicio.nomServicio,
+            costo: serviciosAsociados[i].costo,
+            cantidad: cantidadesServiciosAsociados[i]
+
+        });
+
+        actualizarInputServiciosSeleccionados();
+
+    }
+
+    @{
+
+        var errorFinalizacion = "";
+
+        if(ViewBag.ErrorFinalizacion != null)
+        {
+            errorFinalizacion = ViewBag.ErrorFinalizacion;
+        }
+    }
+
+    @if (errorFinalizacion == "True")
+    {
+        <text>
+            Swal.fire({
+                title: "Error",
+                text: "No se ha abonado todo el pendiente",
+                icon: "info"
+            });
+        </text>
+    }
+
+</script>
+

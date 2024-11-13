@@ -1,0 +1,54 @@
+﻿@model List<Role>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Nombre del Rol</th>
+                @if (User.HasClaim("Permiso", "Cambiar Estado Roles"))
+                {
+                    <th style="text-align: center;">Estado</th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rol in Model)
+            {
+                <tr>
+                    <td style="text-align: center;">@rol.NomRol</td>
+                    @if (User.HasClaim("Permiso", "Cambiar Estado Roles"))
+                    {
+                        <td style="display: flex; justify-content: center">
+
+                            <div class="form-check form-switch fs-4">
+
+                                <input @(rol.Estado == true ? "checked" : "") type="checkbox" class="form-check-input" id="estado"
+                                       onchange="cambiarEstado(@rol.IdRol, this)" />
+
+                            </div>
+
+                        </td>
+                    }
+                    
+                    <td style="text-align: center;">
+                        @if (User.HasClaim("Permiso", "Editar Roles"))
+                        {
+                            <a class="btn btn-primary btn-sm" asp-action="Editar" asp-controller="Roles" asp-route-idRol="@rol.IdRol">Editar</a>
+                        }
+                        @if (User.HasClaim("Permiso", "Ver Detalles Roles"))
+                        {
+                            <a class="btn btn-primary btn-sm" asp-action="Detalles" asp-controller="Roles" asp-route-idRol="@rol.IdRol">Detalles</a>
+                        }
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron resultados.</p>
+}
